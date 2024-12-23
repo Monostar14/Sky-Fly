@@ -1,7 +1,7 @@
 name: Sky-Fly
 version: '${project.version}'
 main: top.skyliey.skyfly.Sky_Fly
-author: [Monostar14]
+author: Monostar14
 api-version: '1.20'
 
 commands:
