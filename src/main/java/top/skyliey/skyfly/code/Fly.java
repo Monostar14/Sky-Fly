@@ -17,6 +17,10 @@ public class Fly implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender Commandsender,@NotNull Command command,
                              @NotNull String label,@NotNull String[] args) {
         //fly <true/false>
+        if(!(Commandsender instanceof Player)){
+            sender.sendMessage("§c只有玩家可以执行该命令！");
+            return true;
+        }
         sender = (Player) Commandsender;
         if (sender.hasPermission("skyfly.fly") || sender.isOp()) {
             if (args.length == 1 && args[0].equals("true")) {
