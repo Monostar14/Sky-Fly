@@ -12,6 +12,9 @@ public final class Sky_Fly extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         getLogger().info("Sky_Fly插件启动成功!");
+        //版本检查
+        String version = getServer().getBukkitVersion();
+        getLogger().info("当前服务器版本为" + version);
         regCommands();
         regTabCompleter();
 
@@ -20,6 +23,7 @@ public final class Sky_Fly extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        getLogger().info("Sky_Fly插件已关闭!");
     }
 
     public void regCommands() {
@@ -29,6 +33,8 @@ public final class Sky_Fly extends JavaPlugin {
     }
 
     public void regTabCompleter() {
-        //注册Tab补全
+        //注册Tab
+        Objects.requireNonNull(this.getCommand("fly")).setTabCompleter(new Fly());
+        Objects.requireNonNull(this.getCommand("flyspeed")).setTabCompleter(new FlySpeed());
     }
 }

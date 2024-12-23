@@ -7,6 +7,10 @@ api-version: '1.20'
 commands:
   fly:
     description: Sky-Fly command.
-    usage: /skyfly <true|false>
+    usage: /fly <true|false>
     permission: skyfly.fly
+  flyspeed:
+    description: Sky-Fly command.
+    usage: /flyspeed <-1|0|1>
+    permission: skyfly.flyspeed
 
