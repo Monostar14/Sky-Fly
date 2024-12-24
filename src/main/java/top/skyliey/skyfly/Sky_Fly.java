@@ -10,19 +10,15 @@ public final class Sky_Fly extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-        getLogger().info("Sky_Fly插件启动成功!");
-        //版本检查
-        String version = getServer().getBukkitVersion();
-        getLogger().info("当前服务器版本为" + version);
         regCommands();
         regTabCompleter();
-
+        getLogger().info("Sky_Fly插件启动成功!");
+        String version = getServer().getBukkitVersion();
+        getLogger().info("当前服务器版本为" + version);
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
         getLogger().info("Sky_Fly插件已关闭!");
     }
 
