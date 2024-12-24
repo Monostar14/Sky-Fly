@@ -1,4 +1,4 @@
-package top.skyliey.skyfly.code;
+package top.skyliey.skyfly.commands;
 
 import com.google.common.collect.ImmutableList;
 import org.bukkit.command.Command;

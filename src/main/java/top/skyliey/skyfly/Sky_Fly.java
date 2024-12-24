@@ -1,8 +1,8 @@
 package top.skyliey.skyfly;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import top.skyliey.skyfly.code.Fly;
-import top.skyliey.skyfly.code.FlySpeed;
+import top.skyliey.skyfly.commands.Fly;
+import top.skyliey.skyfly.commands.FlySpeed;
 
 import java.util.Objects;
 
