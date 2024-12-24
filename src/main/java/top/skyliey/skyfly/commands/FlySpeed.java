@@ -20,18 +20,24 @@ public class FlySpeed implements CommandExecutor, TabCompleter {
             sender.sendMessage("§c只有玩家可以执行该命令！");
             return true;
         }
-        sender = (Player) commandSender;
-        if (sender.isOp() || sender.hasPermission("skyfly.flyspeed")) {
+        Player player = (Player)commandSender;
+        if (player.isOp() || player.hasPermission("skyfly.flyspeed")) {
             if (args.length == 1 && args[0].equalsIgnoreCase("flyspeed")) {
-                double speed = Double.parseDouble(args[0]);
-                if (speed >= -1 && speed <= 2) {
-                    commandSender.sendMessage("§a飞行速度已设置为" + speed);
-                    sender.setFlySpeed((float) speed);
-                    return true;
-                }else{
-                    commandSender.sendMessage("§c飞行速度只能在-1到2之间.");
+                try{
+                    double speed = Double.parseDouble(args[0]);
+                    if (speed >= -1 && speed <= 2) {
+                        commandSender.sendMessage("§a飞行速度已设置为" + speed);
+                        player.setFlySpeed((float) speed);
+                        return true;
+                    }else{
+                        commandSender.sendMessage("§c飞行速度只能在-1到2之间.");
+                        return false;
+                    }
+                } catch (NumberFormatException e) {
+                    commandSender.sendMessage("§4参数错误，请输入数字！");
                     return false;
                 }
+
             }
         }
         return false;
