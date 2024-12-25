@@ -22,11 +22,11 @@ public class Fly implements CommandExecutor, TabCompleter {
             return true;
         }
         sender = (Player) Commandsender;
-        if (sender.hasPermission("skyfly.fly") || sender.isOp()) {
+        if (sender.isOp() || sender.hasPermission("skyfly.fly")) {
             if (args.length == 1 && args[0].equals("true")) {
                 sender.setAllowFlight(true);
                 sender.sendMessage("§a已打开飞行模式！");
-            } else if (args.length == 1 && args[0].equalsIgnoreCase("false")) {
+            }else if(args.length == 1 && args[0].equalsIgnoreCase("false")) {
                 sender.setAllowFlight(false);
                 sender.sendMessage("§c已关闭飞行模式！");
             }

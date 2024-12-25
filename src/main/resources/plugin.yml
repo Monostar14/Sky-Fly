@@ -11,7 +11,7 @@ commands:
     permission: skyfly.fly
   flyspeed:
     description: Sky-Fly command.
-    usage: /flyspeed <-1|0|1>
+    usage: /flyspeed <speed>
     permission: skyfly.flyspeed
 
 permissions:
