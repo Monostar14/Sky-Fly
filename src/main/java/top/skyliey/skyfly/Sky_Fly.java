@@ -1,5 +1,6 @@
 package top.skyliey.skyfly;
 
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import top.skyliey.skyfly.commands.Fly;
 import top.skyliey.skyfly.commands.FlySpeed;
@@ -12,9 +13,9 @@ public final class Sky_Fly extends JavaPlugin {
     public void onEnable() {
         regCommands();
         regTabCompleter();
-        getLogger().info("Sky_Fly插件启动成功!");
+        getLogger().info(ChatColor.DARK_GREEN +"Sky_Fly插件启动成功!");
         String version = getServer().getBukkitVersion();
-        getLogger().info("当前服务器版本为" + version);
+        getLogger().info(ChatColor.DARK_GREEN + "当前服务器版本为" + version);
     }
 
     @Override
