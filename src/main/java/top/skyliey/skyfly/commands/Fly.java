@@ -14,14 +14,14 @@ import java.util.List;
 public class Fly implements CommandExecutor, TabCompleter {
     Player sender;
     @Override
-    public boolean onCommand(@NotNull CommandSender Commandsender,@NotNull Command command,
+    public boolean onCommand(@NotNull CommandSender commandSender,@NotNull Command command,
                              @NotNull String label,@NotNull String[] args) {
         //fly <true/false>
-        if(!(Commandsender instanceof Player)){
+        if(!(commandSender instanceof Player)){
             sender.sendMessage("§c只有玩家可以执行该命令！");
             return true;
         }
-        sender = (Player) Commandsender;
+        sender = (Player) commandSender;
         if (sender.isOp() || sender.hasPermission("skyfly.fly")) {
             if (args.length == 1 && args[0].equals("true")) {
                 sender.setAllowFlight(true);

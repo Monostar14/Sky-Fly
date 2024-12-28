@@ -13,6 +13,10 @@ commands:
     description: Sky-Fly command.
     usage: /flyspeed <speed>
     permission: skyfly.flyspeed
+  flypower:
+    description: Sky-Fly command.
+    usage: /flypower <power>
+    permission: skyfly.flypower
 
 permissions:
   skyfly.fly:
@@ -21,4 +25,11 @@ permissions:
   skyfly.flyspeed:
     description: Allows the player to use the /flyspeed command.
     default: op
+  skyfly.flypower:
+    description: Allows the player to use the /flypower command.
+    default: op
+
+
+
+
 
