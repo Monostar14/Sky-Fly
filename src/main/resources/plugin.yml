@@ -1,5 +1,5 @@
 name: Sky-Fly
-version: '${project.version}'
+version: 'v1.0.0 Beta'
 main: top.skyliey.skyfly.Sky_Fly
 author: Monostar14
 api-version: '1.20'
