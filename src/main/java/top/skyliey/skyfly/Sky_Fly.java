@@ -1,6 +1,8 @@
 package top.skyliey.skyfly;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,40 +14,39 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Sky_Fly extends JavaPlugin {
+
     private File dataFile;
     private FileConfiguration dataConfig;
+    private Ctrl ctrl = new Ctrl();
 
     @Override
     public void onEnable() {
+        // 加载配置
         setupDataFile();
-        regCommands();
-        regTabCompleter();
-        getLogger().info(ChatColor.DARK_GREEN +"Sky_Fly插件启动成功!");
-        String version = getServer().getBukkitVersion();
-        getLogger().info(ChatColor.DARK_GREEN + "当前服务器版本为" + version);
-        getLogger().info(ChatColor.DARK_GREEN + "当前插件版本为" + getConfig().getString("version"));
+        registerCommandsAndTabCompleters();
+        logPluginInfo();
+        // 保存配置
         saveConfig();
         saveDataConfig();
     }
 
     @Override
     public void onDisable() {
-        getLogger().info("Sky_Fly插件已关闭!");
+        ctrl.logInfo("Sky_Fly 已关闭!");
         saveConfig();
     }
 
-    public void regCommands() {
-        //注册命令
-        Objects.requireNonNull(this.getCommand("fly")).setExecutor(new Fly());
-        Objects.requireNonNull(this.getCommand("flyspeed")).setExecutor(new FlySpeed());
-        Objects.requireNonNull(this.getCommand("flypower")).setExecutor(new FlyPower(this));
+    private void registerCommandsAndTabCompleters() {
+        getCommand("fly").setExecutor(new Fly(ctrl));
+        getCommand("flyspeed").setExecutor(new FlySpeed(ctrl));
+        registerCommandWithTabCompleter("flypower", new FlyPower(this));
     }
 
-    public void regTabCompleter() {
-        //注册Tab
-        Objects.requireNonNull(this.getCommand("fly")).setTabCompleter(new Fly());
-        Objects.requireNonNull(this.getCommand("flyspeed")).setTabCompleter(new FlySpeed());
+    private void registerCommandWithTabCompleter(String command, CommandExecutor executor) {
+        Objects.requireNonNull(getCommand(command)).setExecutor(executor);
+        Objects.requireNonNull(getCommand(command)).setTabCompleter((TabCompleter) executor); // 强制转换为 TabCompleter
     }
+
 
     private void setupDataFile() {
         dataFile = new File(getDataFolder(), "data.yml");
@@ -60,11 +61,23 @@ public class Sky_Fly extends JavaPlugin {
         try {
             dataConfig.save(dataFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            ctrl.logError("保存 data.yml 时发生错误：", e);
         }
     }
 
     public FileConfiguration getDataConfig() {
         return dataConfig;
     }
+
+    private void logPluginInfo() {
+        ctrl.logInfo(ChatColor.DARK_GREEN + "Sky-Fly 已启动!");
+        String version = getServer().getBukkitVersion();
+        ctrl.logInfo(ChatColor.DARK_GREEN + "当前服务器版本为" + version);
+        ctrl.logInfo(ChatColor.DARK_GREEN + "当前插件版本为" + getConfig().getString("version"));
+    }
+
+    public Ctrl getCtrl() {
+        return ctrl; // 返回 Ctrl 实例
+    }
+
 }
