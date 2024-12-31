@@ -118,7 +118,7 @@ public class Metrics {
                         false);
     }
 
-    /** Shuts down the underlying scheduler service. */
+    /** Shuts down the underlying scheduler for the service. */
     public void shutdown() {
         metricsBase.shutdown();
     }
