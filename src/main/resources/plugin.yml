@@ -1,7 +1,7 @@
 name: Sky-Fly
 version: 'v1.0.0 Beta'
 main: top.skyliey.skyfly.Sky_Fly
-author: [MincHR549, Monostar14]
+author: MincHR549, Monostar14
 api-version: '1.20'
 
 commands:
