@@ -1,5 +1,6 @@
 package top.skyliey.skyfly;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
@@ -21,8 +22,8 @@ public class Sky_Fly extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        int pluginId = 24275; // <-- Repla ce with the id of your plugin!
-        org.bstats.bukkit.Metrics metrics = new org.bstats.bukkit.Metrics(this, pluginId);
+        int pluginId = 24290; // <-- Replace with the id of your plugin!
+        Metrics metrics = new Metrics(this, pluginId);
         // 加载配置
         setupDataFile();
         registerCommandsAndTabCompleters();
