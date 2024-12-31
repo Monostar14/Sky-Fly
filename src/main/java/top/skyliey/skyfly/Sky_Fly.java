@@ -21,7 +21,7 @@ public class Sky_Fly extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        int pluginId = 24275; // <-- Replace with the id of your plugin!
+        int pluginId = 24275; // <-- Repla ce with the id of your plugin!
         org.bstats.bukkit.Metrics metrics = new org.bstats.bukkit.Metrics(this, pluginId);
         // 加载配置
         setupDataFile();
