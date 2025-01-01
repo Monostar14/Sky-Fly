@@ -2,11 +2,9 @@ package top.skyliey.skyfly;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import java.util.logging.Logger;
 
-public class Ctrl extends JavaPlugin {
+public class Ctrl {
 
     private Logger logger = Logger.getLogger("Sky-Fly");
 
@@ -17,6 +15,7 @@ public class Ctrl extends JavaPlugin {
     public void logInfo(String m) {
         logger.info(m);
     }
+
     public void logWarn(String m) {
         logger.warning(m);
     }
@@ -29,5 +28,4 @@ public class Ctrl extends JavaPlugin {
             logger.severe(element.toString());
         }
     }
-
 }
