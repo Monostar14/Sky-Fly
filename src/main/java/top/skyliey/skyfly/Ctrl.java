@@ -2,6 +2,7 @@ package top.skyliey.skyfly;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+
 import java.util.logging.Logger;
 
 public class Ctrl {
@@ -15,7 +16,6 @@ public class Ctrl {
     public void logInfo(String m) {
         logger.info(m);
     }
-
     public void logWarn(String m) {
         logger.warning(m);
     }
@@ -25,7 +25,8 @@ public class Ctrl {
         logger.severe(message);
         // 打印堆栈跟踪
         for (StackTraceElement element : e.getStackTrace()) {
-            logger.severe(element.toString());
+            logger .severe(element.toString());
         }
     }
+
 }
