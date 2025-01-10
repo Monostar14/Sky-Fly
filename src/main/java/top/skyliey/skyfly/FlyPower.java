@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FlyPower implements CommandExecutor, TabExecutor {
 
@@ -38,7 +39,9 @@ public class FlyPower implements CommandExecutor, TabExecutor {
 
         // 检查玩家是否在线
         if (player == null) {
-            ctrl.sendMessageWithColor(sender, "&e玩家 " + playerName + " 不在线或不存在！");
+            String noPlayerMessage = Objects.requireNonNull(plugin.getConfig().getString
+                    ("warnMessages.noPlayer")).replace("{player}", playerName);
+            ctrl.sendMessageWithColor(sender, noPlayerMessage);
             return true;
         }
 
@@ -46,11 +49,15 @@ public class FlyPower implements CommandExecutor, TabExecutor {
         try {
             int power = Integer.parseInt(args[2]);
             // 保存飞行能量到配置文件
-            plugin.getDataConfig().set(playerName + ".flypower", power);
+            DataManager.setFlyPower(String.valueOf(player), power);
+            //plugin.getDataConfig().set(playerName + ".flypower", power);
             plugin.saveDataConfig();
             ctrl.sendMessageWithColor(sender, "&e玩家 " + playerName + " 的飞行能量已设置为 " + power);
         } catch (NumberFormatException e) {
-            ctrl.sendMessageWithColor(sender, "&e请输入有效的数字！");
+            String invalidNumbersMessage = Objects.requireNonNull(plugin.getConfig().getString
+                    ("warnMessages.invalidNumbers"));
+            //警告语句
+            ctrl.sendMessageWithColor(sender, invalidNumbersMessage);
         }
 
         return true;

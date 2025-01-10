@@ -2,3 +2,15 @@
 #版本检查用，不要修改
 version: "v1.0.0 Beta"
 
+#玩家初始飞行能量
+defaultFlyPower: 0
+#警告消息
+warnMessages:
+    #查无此玩家
+    noPlayer: "&4玩家 {player} 不在线或不存在！"
+    #输入的无效字符
+    invalidNumbers: "&4输入的数字无效！"
+    #保存数据文件错误
+    fileError: "保存 data.yml 时发生错误"
+
+

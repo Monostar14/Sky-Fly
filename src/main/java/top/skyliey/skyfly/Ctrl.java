@@ -19,13 +19,12 @@ public class Ctrl {
     public void logWarn(String m) {
         logger.warning(m);
     }
-
     public void logError(String message, Exception e) {
         // 打印错误信息
         logger.severe(message);
         // 打印堆栈跟踪
         for (StackTraceElement element : e.getStackTrace()) {
-            logger .severe(element.toString());
+            logger.severe(element.toString());
         }
     }
 

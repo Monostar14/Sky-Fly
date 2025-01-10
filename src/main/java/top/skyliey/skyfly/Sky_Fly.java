@@ -64,7 +64,7 @@ public class Sky_Fly extends JavaPlugin {
         try {
             dataConfig.save(dataFile);
         } catch (IOException e) {
-            ctrl.logError("保存 data.yml 时发生错误：", e);
+            ctrl.logError(getConfig().getString("warnMessages.fileError"), e);
         }
     }
 
