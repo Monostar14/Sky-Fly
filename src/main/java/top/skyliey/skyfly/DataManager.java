@@ -6,7 +6,7 @@ import java.io.File;
 
 public class DataManager {
 
-    private static Sky_Fly plugin;
+    public static Sky_Fly plugin;
     private File dataFile;
     private static FileConfiguration dataConfig;
 

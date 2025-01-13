@@ -11,6 +11,9 @@ import top.skyliey.skyfly.Ctrl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static top.skyliey.skyfly.DataManager.plugin;
 
 public class Fly implements CommandExecutor, TabCompleter {
 
@@ -26,7 +29,9 @@ public class Fly implements CommandExecutor, TabCompleter {
                              @NotNull String label, @NotNull String[] args) {
         // fly <true/false>命令处理
         if (!(commandSender instanceof Player)) {
-            ctrl.sendMessageWithColor(commandSender, "&c只有玩家可以执行该命令！");
+            String onlyPlayer = Objects.requireNonNull(plugin.getConfig().getString
+                    ("warnMessages.noPlayer"));
+            ctrl.sendMessageWithColor(commandSender, onlyPlayer);
             return true;
         }
         Player sender = (Player) commandSender;

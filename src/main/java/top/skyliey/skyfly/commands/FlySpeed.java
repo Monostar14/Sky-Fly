@@ -11,6 +11,8 @@ import top.skyliey.skyfly.Ctrl;
 
 import java.util.List;
 
+import static top.skyliey.skyfly.DataManager.plugin;
+
 public class FlySpeed implements CommandExecutor, TabCompleter {
 
     private final Ctrl ctrl; // 使用共享的 Ctrl 实例
@@ -25,7 +27,8 @@ public class FlySpeed implements CommandExecutor, TabCompleter {
                              @NotNull String label, @NotNull String[] args) {
         // flyspeed <speed> 命令处理
         if (!(commandSender instanceof Player)) {
-            ctrl.sendMessageWithColor(commandSender, "&c只有玩家可以执行该命令！");
+            ctrl.sendMessageWithColor(commandSender, plugin.getConfig().getString
+                    ("messages.playerOnly"));
             return true;
         }
         Player player = (Player) commandSender;

@@ -6,6 +6,8 @@ version: "v1.0.0 Beta"
 defaultFlyPower: 0
 #警告消息
 warnMessages:
+    #当在控制台输入仅玩家才可执行的指令时
+    playerOnly: "仅玩家可执行此指令！"
     #查无此玩家
     noPlayer: "&4玩家 {player} 不在线或不存在！"
     #输入的无效字符
