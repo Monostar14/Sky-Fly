@@ -1,8 +1,10 @@
 package top.skyliey.skyfly;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 
 public class DataManager {
 
@@ -12,6 +14,15 @@ public class DataManager {
 
     public DataManager(Sky_Fly plugin) {
         DataManager.plugin = plugin;
+        plugin.setupDataFile();
+        if (!dataFile.exists()) {
+            try {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        dataConfig = YamlConfiguration.loadConfiguration(dataFile);
     }
 
     //返回玩家在data.yml中的飞行能量值，要是没有就返回默认值 :)

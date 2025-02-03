@@ -7,12 +7,13 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import top.skyliey.skyfly.commands.Fly;
-import top.skyliey.skyfly.commands.FlySpeed;
+import top.skyliey.skyfly.commands.CommandsManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+
+import static top.skyliey.skyfly.DataManager.plugin;
 
 public class Sky_Fly extends JavaPlugin {
 
@@ -20,13 +21,19 @@ public class Sky_Fly extends JavaPlugin {
     private FileConfiguration dataConfig;
     private Ctrl ctrl = new Ctrl();
 
+    public CommandsManager commandsManager;
+    public TabCompleter tabCompleter;
     @Override
     public void onEnable() {
-        int pluginId = 24290; // <-- Replace with the id of your plugin!
+        int pluginId = 24290;
         Metrics metrics = new Metrics(this, pluginId);
+        this.commandsManager = new CommandsManager(this, ctrl);
+        getCommand("skyfly").setExecutor(new CommandsManager(this, ctrl));
+        getCommand("skyfly").setTabCompleter(new top.skyliey.skyfly.TabCompleter(this, ctrl));
         // 加载配置
+        saveDefaultConfig();
+        reloadConfig();
         setupDataFile();
-        registerCommandsAndTabCompleters();
         logPluginInfo();
         // 保存配置
         saveConfig();
@@ -39,19 +46,17 @@ public class Sky_Fly extends JavaPlugin {
         saveConfig();
     }
 
-    private void registerCommandsAndTabCompleters() {
-        getCommand("fly").setExecutor(new Fly(ctrl));
-        getCommand("flyspeed").setExecutor(new FlySpeed(ctrl));
-        registerCommandWithTabCompleter("flypower", new FlyPower(this));
-    }
-
-    private void registerCommandWithTabCompleter(String command, CommandExecutor executor) {
-        Objects.requireNonNull(getCommand(command)).setExecutor(executor);
-        Objects.requireNonNull(getCommand(command)).setTabCompleter((TabCompleter) executor); // 强制转换为 TabCompleter
-    }
+//    private void registerCommandsAndTabCompleters() {
+//        getCommand("skyfly").setExecutor(new CommandsManager(plugin, ctrl));
+//    }
+//
+//    private void registerCommandWithTabCompleter(String command, CommandExecutor executor) {
+//        Objects.requireNonNull(getCommand(command)).setExecutor(executor);
+//        Objects.requireNonNull(getCommand(command)).setTabCompleter((TabCompleter) executor); // 强制转换为 TabCompleter
+//    }
 
 
-    private void setupDataFile() {
+    void setupDataFile() {
         dataFile = new File(getDataFolder(), "data.yml");
         if (!dataFile.exists()) {
             dataFile.getParentFile().mkdirs();

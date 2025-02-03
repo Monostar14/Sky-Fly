@@ -9,6 +9,7 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import top.skyliey.skyfly.commands.CommandsManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class FlyPower implements CommandExecutor, TabExecutor {
                              @NotNull String label, @NotNull String[] args) {
         // flypower set <player> <number>
         if (args.length < 3 || !args[0].equalsIgnoreCase("set")) {
-            ctrl.sendMessageWithColor(sender, "&e用法: /flypower set <玩家> <数值>");
+            CommandsManager.invalidNumbers(sender);
             return true;
         }
 
@@ -40,7 +41,7 @@ public class FlyPower implements CommandExecutor, TabExecutor {
         // 检查玩家是否在线
         if (player == null) {
             String noPlayerMessage = Objects.requireNonNull(plugin.getConfig().getString
-                    ("warnMessages.noPlayer")).replace("{player}", playerName);
+                    ("warnMessages.noPlayer")).replace("%player%", playerName);
             ctrl.sendMessageWithColor(sender, noPlayerMessage);
             return true;
         }
@@ -50,14 +51,10 @@ public class FlyPower implements CommandExecutor, TabExecutor {
             int power = Integer.parseInt(args[2]);
             // 保存飞行能量到配置文件
             DataManager.setFlyPower(String.valueOf(player), power);
-            //plugin.getDataConfig().set(playerName + ".flypower", power);
             plugin.saveDataConfig();
             ctrl.sendMessageWithColor(sender, "&e玩家 " + playerName + " 的飞行能量已设置为 " + power);
         } catch (NumberFormatException e) {
-            String invalidNumbersMessage = Objects.requireNonNull(plugin.getConfig().getString
-                    ("warnMessages.invalidNumbers"));
-            //警告语句
-            ctrl.sendMessageWithColor(sender, invalidNumbersMessage);
+            CommandsManager.invalidNumbers(sender);
         }
 
         return true;

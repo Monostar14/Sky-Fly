@@ -5,18 +5,10 @@ author: MincHR549, Monostar14
 api-version: '1.20'
 
 commands:
-  fly:
+  skyfly:
     description: Sky-Fly command.
-    usage: /fly <true|false>
-    permission: skyfly.fly
-  flyspeed:
-    description: Sky-Fly command.
-    usage: /flyspeed <speed>
-    permission: skyfly.flyspeed
-  flypower:
-    description: Sky-Fly command.
-    usage: /flypower <power>
-    permission: skyfly.flypower
+    usage: /skyfly
+    permission: skyfly.skyfly
 
 permissions:
   skyfly.fly:
@@ -27,6 +19,9 @@ permissions:
     default: op
   skyfly.flypower:
     description: Allows the player to use the /flypower command.
+    default: op
+  skyfly.skyfly:
+    description: Allows the player to use the /skyfly command.
     default: op
 
 

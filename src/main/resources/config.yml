@@ -1,18 +1,11 @@
 
 #版本检查用，不要修改
-version: "v1.0.0 Beta"
+version: "v1.0.0 Dev2"
 
-#玩家初始飞行能量
-defaultFlyPower: 0
-#警告消息
 warnMessages:
-    #当在控制台输入仅玩家才可执行的指令时
-    playerOnly: "仅玩家可执行此指令！"
-    #查无此玩家
-    noPlayer: "&4玩家 {player} 不在线或不存在！"
-    #输入的无效字符
-    invalidNumbers: "&4输入的数字无效！"
-    #保存数据文件错误
-    fileError: "保存 data.yml 时发生错误"
-
+  onlyPlayer: "&4该指令只能由玩家使用！"
+  noPlayer: "&c玩家 %player% 不在线或不存在！"
+  invalidNumbers: "&4输入错误！"
+  fileError: "&4文件 data.yml 读取失败！"
+  reloadSuccess: "&a配置文件重载成功！"
 
