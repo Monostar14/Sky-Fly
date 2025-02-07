@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 public class Ctrl {
 
-    private Logger logger = Logger.getLogger("Sky-Fly");
+    private Logger logger = Logger.getLogger("SkyFly");
 
     public void sendMessageWithColor(CommandSender sender, String message) {
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
