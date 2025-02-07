@@ -1,12 +1,12 @@
 package top.skyliey.skyfly;
 
 import org.bstats.bukkit.Metrics;
-import org.bukkit.ChatColor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import top.skyliey.skyfly.commands.SkyFlyCommands;
+import top.skyliey.skyfly.utils.DataManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,10 +18,13 @@ public class Sky_Fly extends JavaPlugin {
     private FileConfiguration dataConfig;
     private Ctrl ctrl = new Ctrl();
 
-    public SkyFlyCommands skyFlyCommands;
-    public TabCompleter tabCompleter;
+    private DataManager DataManager;
+
+    private static Sky_Fly instance;
+
     @Override
     public void onEnable() {
+        instance = this;
         int pluginId = 24290;
         Metrics metrics = new Metrics(this, pluginId);
         SkyFlyCommands skyFlyCommands = new SkyFlyCommands(this, ctrl);
@@ -45,15 +48,9 @@ public class Sky_Fly extends JavaPlugin {
         saveDataConfig();
     }
 
-//    private void registerCommandsAndTabCompleters() {
-//        getCommand("skyfly").setExecutor(new CommandsManager(plugin, ctrl));
-//    }
-//
-//    private void registerCommandWithTabCompleter(String command, CommandExecutor executor) {
-//        Objects.requireNonNull(getCommand(command)).setExecutor(executor);
-//        Objects.requireNonNull(getCommand(command)).setTabCompleter((TabCompleter) executor); // 强制转换为 TabCompleter
-//    }
-
+    public static Sky_Fly getInstance() {
+        return instance;
+    }
 
     public File setupDataFile() {
         dataFile = new File(getDataFolder(), "data.yml");
@@ -89,6 +86,10 @@ public class Sky_Fly extends JavaPlugin {
 
     public Ctrl getCtrl() {
         return ctrl; // 返回 Ctrl 实例
+    }
+
+    public DataManager getConfigManager() {
+        return this.DataManager;
     }
 
 }

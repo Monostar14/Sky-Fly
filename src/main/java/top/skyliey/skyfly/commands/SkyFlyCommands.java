@@ -35,7 +35,8 @@ public class SkyFlyCommands implements CommandExecutor, TabCompleter {
         if(args[0].equalsIgnoreCase("reload")) {
             if (args.length == 1) {
                 long startTime = System.currentTimeMillis();
-                reload();
+                Sky_Fly.getInstance().reloadConfig();
+                Sky_Fly.getInstance().setupDataFile();
                 CustomTimingsHandler.reload();
                 long endTime = System.currentTimeMillis();
                 ctrl.sendMessageWithColor(sender, plugin.getConfig().getString
