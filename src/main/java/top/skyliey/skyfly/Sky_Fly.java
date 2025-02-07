@@ -25,6 +25,7 @@ public class Sky_Fly extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        DataManager = new DataManager(this);
         int pluginId = 24290;
         Metrics metrics = new Metrics(this, pluginId);
         SkyFlyCommands skyFlyCommands = new SkyFlyCommands(this, ctrl);
