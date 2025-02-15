@@ -1,16 +1,12 @@
 
 #版本检查用，不要修改
 version: "v1.0.0 Dev2"
+#玩家初始飞行能量值
+initial-energy: 0
 
-warn-messages:
-  only-player: "&4该指令只能由玩家使用!"
-  no-player: "&c玩家 %player% 不在线或不存在!"
-  invalid-numbers: "&4指令输入错误!"
-  file-error: "&4文件 data.yml 读取失败!"
-  reload-success: "&a配置文件重载成功!"
-  fly-speed-error: "&4输入错误!飞行速度只能在区间[-1, 1]内!"
-  no-permission: "&4你没有权限执行该指令!"
+messages:
+  no-permission: '&4你没有权限使用此命令'
 
-#默认初始飞行能量
-default-flypower: 0
+
+
 

@@ -11,19 +11,30 @@ commands:
     permission: skyfly.skyfly
 
 permissions:
-  skyfly.fly:
-    description: Allows the player to use the /fly command.
+  skyfly.use:
+    description: 可以飞行的权限。
     default: op
-  skyfly.flyspeed:
-    description: Allows the player to use the /flyspeed command.
+  skyfly.speed:
+    description: 可以设置自己飞行速度的权限。
     default: op
-  skyfly.flypower:
-    description: Allows the player to use the /flypower command.
+  skyfly.energy.set:
+    description: 可以设置自己飞行能量的权限。
     default: op
-  skyfly.skyfly:
-    description: Allows the player to use the /skyfly command.
+  skyfly.energy.get:
+    description: 可以查看自己飞行能量的权限。
     default: op
-
+  skyfly.energy.add:
+    description: 可以增加自己飞行能量的权限。
+    default: op
+  skyfly.energy.remove:
+    description: 可以减少自己飞行能量的权限。
+    default: op
+  skyfly.reload:
+    description: 可以重载插件的权限。
+    default: op
+  skyfly.help:
+    description: 可以查看插件帮助的权限。
+    default: true
 
 
 

@@ -1,5 +1,6 @@
 package top.skyliey.skyfly.utils;
 
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import top.skyliey.skyfly.Sky_Fly;
@@ -7,47 +8,58 @@ import top.skyliey.skyfly.Sky_Fly;
 import java.io.File;
 import java.io.IOException;
 
-public class DataManager {
 
-    public static Sky_Fly plugin;
-    public File dataFile;
+public class DataManager {
+    private static DataManager instance;
     private FileConfiguration dataConfig;
+    private final File dataFile;
+    private static Sky_Fly plugin;
 
     public DataManager(Sky_Fly plugin) {
-        DataManager.plugin = plugin;
-        dataFile = plugin.setupDataFile();
-        if (dataFile == null) {
-            // 处理dataFile为null的情况
-            throw new IllegalArgumentException("data.yml文件错误或不存在");
-        }
+        this.dataFile = new File(plugin.getDataFolder(), "data.yml");
         if (!dataFile.exists()) {
+            dataFile.getParentFile().mkdirs();
             try {
                 dataFile.createNewFile();
-            } catch (IOException e) {
+            }catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        dataConfig = YamlConfiguration.loadConfiguration(dataFile);
+        this.dataConfig = YamlConfiguration.loadConfiguration(dataFile);
     }
 
-    //返回玩家在data.yml中的飞行能量值，要是没有就返回默认值 :)
-    public int getFlyPower(String playerName) {
-        return dataConfig.getInt(playerName + ".flypower", plugin.getConfig().getInt("default-flypower"));
+    public static DataManager getInstance() {
+        if(instance == null) {
+            instance = new DataManager(plugin);
+        }
+        return instance;
+    }
+    public int getEnergy(String playerName) {
+        return dataConfig.getInt("players." + playerName + ".energy");
     }
 
-    //设置玩家飞行能量
-    public void setFlyPower(String playerName, int power) {
-        dataConfig.set(playerName + ".flypower", power);
-        plugin.saveDataConfig();
+    public void setEnergy(String playerName, int energy) {
+        dataConfig.set("players." + playerName + ".energy", energy);
+        saveConfig();
     }
 
-    private void saveDataConfig() {
+    public void  addEnergy(String playerName, int energy) {
+        int currentEnergy = getEnergy(playerName);
+        dataConfig.set("players." + playerName + ".energy", currentEnergy + energy);
+        saveConfig();
+    }
+    public void removeEnergy(String playerName, int energy) {
+        int currentEnergy = getEnergy(playerName);
+        dataConfig.set("players." + playerName + ".energy", currentEnergy - energy);
+        saveConfig();
+    }
+
+    private void saveConfig() {
         try {
             dataConfig.save(dataFile);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 }
+
