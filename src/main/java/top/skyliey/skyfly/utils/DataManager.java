@@ -12,43 +12,43 @@ import java.io.IOException;
 public class DataManager {
     private static DataManager instance;
     private FileConfiguration dataConfig;
-    private final File dataFile;
-    private static Sky_Fly plugin;
+    private File dataFile;
+    private final Sky_Fly plugin;
 
     public DataManager(Sky_Fly plugin) {
-        this.dataFile = new File(plugin.getDataFolder(), "data.yml");
+        this.plugin = plugin;
+        loadData();
+    }
+    public void loadData() {
+        this.dataFile = new File(this.plugin.getDataFolder(), "data.yml");
         if (!dataFile.exists()) {
-            dataFile.getParentFile().mkdirs();
-            try {
-                dataFile.createNewFile();
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
+            this.plugin.saveResource("data.yml", false);
         }
         this.dataConfig = YamlConfiguration.loadConfiguration(dataFile);
     }
 
     public static DataManager getInstance() {
         if(instance == null) {
-            instance = new DataManager(plugin);
+            instance = new DataManager(Sky_Fly.getPlugin());
         }
         return instance;
     }
+
     public int getEnergy(String playerName) {
         return dataConfig.getInt("players." + playerName + ".energy");
     }
 
-    public void setEnergy(String playerName, int energy) {
+    public void setEnergy(String playerName, double energy) {
         dataConfig.set("players." + playerName + ".energy", energy);
         saveConfig();
     }
 
-    public void  addEnergy(String playerName, int energy) {
+    public void addEnergy(String playerName, double energy) {
         int currentEnergy = getEnergy(playerName);
         dataConfig.set("players." + playerName + ".energy", currentEnergy + energy);
         saveConfig();
     }
-    public void removeEnergy(String playerName, int energy) {
+    public void removeEnergy(String playerName, double energy) {
         int currentEnergy = getEnergy(playerName);
         dataConfig.set("players." + playerName + ".energy", currentEnergy - energy);
         saveConfig();

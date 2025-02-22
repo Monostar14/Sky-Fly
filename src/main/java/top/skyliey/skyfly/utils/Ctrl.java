@@ -2,12 +2,10 @@ package top.skyliey.skyfly.utils;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.Plugin;
 import top.skyliey.skyfly.Sky_Fly;
 
 import java.util.logging.Logger;
 
-import static org.bukkit.plugin.java.JavaPlugin.getPlugin;
 
 public class Ctrl {
     private Logger logger = Logger.getLogger("SkyFly");

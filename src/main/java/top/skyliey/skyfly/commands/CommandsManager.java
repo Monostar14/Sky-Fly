@@ -51,34 +51,47 @@ public class CommandsManager implements CommandExecutor {
             switch (args[1].toLowerCase()) {
                 case "set":
                     if (args.length < 4 || !sender.hasPermission("skyfly.energy.set")) {
-                        ctrl.sendMessageWithColor(sender, "&4&l命令错误或权限不足！");
+                        ctrl.noPermission();
                         return false;
                     }
                     int setPower = Integer.parseInt(args[3]);
+                    if (setPower < 0) {
+                        ctrl.sendMessageWithColor(sender, "&4&l错误：&r&c飞行能量不能为负数！");
+                        return true;
+                    }
                     dataManager.setEnergy(player.getName(), setPower);
                     ctrl.sendMessageWithColor(sender, "&2&l成功：&r&a已将 " + player.getName() + " 的飞行能量设置为 " + setPower);
                     break;
                 case "add":
                     if (args.length < 4 || !sender.hasPermission("skyfly.energy.add")) {
-                        ctrl.sendMessageWithColor(sender, "&4&l命令错误或权限不足！");
+                        ctrl.noPermission();
                         return false;
                     }
                     int addPower = Integer.parseInt(args[3]);
+                    if (addPower < 0) {
+                        ctrl.sendMessageWithColor(sender, "&4&l错误：&r&c飞行能量不能为负数！");
+                        return true;
+                    }
                     dataManager.addEnergy(player.getName(), addPower);
                     ctrl.sendMessageWithColor(sender, "&2&l成功：&r&a已将 " + player.getName() + " 的飞行能量增加 " + addPower);
                     break;
                 case "remove":
                     if (args.length < 4 || !sender.hasPermission("skyfly.energy.remove")) {
-                        ctrl.sendMessageWithColor(sender, "&4&l命令错误或权限不足！");
+                        ctrl.noPermission();
                         return false;
                     }
                     int removePower = Integer.parseInt(args[3]);
                     dataManager.removeEnergy(player.getName(), removePower);
+                    int newPower = dataManager.getEnergy(player.getName());
+                    if (newPower < 0) {
+                        dataManager.setEnergy(player.getName(), 0);
+                        ctrl.sendMessageWithColor(sender, "&2&l成功：&r&a" + player.getName() + " 的飞行能量已为 0");
+                    }
                     ctrl.sendMessageWithColor(sender, "&2&l成功：&r&a已将 " + player.getName() + " 的飞行能量减少 " + removePower);
                     break;
                 case "get":
                     if (args.length < 4 || !sender.hasPermission("skyfly.energy.get")) {
-                        ctrl.sendMessageWithColor(sender, "&4&l命令错误或权限不足！");
+                        ctrl.noPermission();
                         return false;
                     }
                     int getPower = dataManager.getEnergy(player.getName());
@@ -90,7 +103,7 @@ public class CommandsManager implements CommandExecutor {
             }
         }else if(args[0].equalsIgnoreCase("speed")) {
             if (args.length < 2 || !sender.hasPermission("skyfly.speed")) {
-                ctrl.sendMessageWithColor(sender, "&4&l命令错误或权限不足！");
+                ctrl.noPermission();
                 return false;
             }
             int speed = Integer.parseInt(args[1]);
@@ -102,7 +115,7 @@ public class CommandsManager implements CommandExecutor {
             ctrl.sendMessageWithColor(sender, "&2&l成功：&r&a已将飞行速度设置为 " + speed);
         }else if(args[0].equalsIgnoreCase("use")) {
             if (args.length < 2 || !sender.hasPermission("skyfly.use")) {
-                ctrl.sendMessageWithColor(sender, "&4&l命令错误或权限不足！");
+                ctrl.noPermission();
                 return false;
             }
             boolean use = Boolean.parseBoolean(args[1]);
@@ -110,7 +123,7 @@ public class CommandsManager implements CommandExecutor {
             ctrl.sendMessageWithColor(sender, "&2&l成功：&r&a已将飞行权限设置为 " + use);
         }else if(args[0].equalsIgnoreCase("reload")) {
             if (!sender.hasPermission("skyfly.reload")) {
-                ctrl.sendMessageWithColor(sender, "&4&l命令错误或权限不足！");
+                ctrl.noPermission();
                 return false;
             }
             plugin.reloadConfig();
